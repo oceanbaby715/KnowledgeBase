@@ -14,9 +14,8 @@
   // ==============================
 
   var QxunForm = function(element, options) {
-    this.$element = $(element)
+    this.element = $(element)
     this.options = $.extend({}, QxunForm.DEFAULTS, options)
-    this.isLoading = false
     this.validateFormObj = null
     this.init()
   }
@@ -61,18 +60,20 @@
   QxunForm.prototype.bindEvent = function() {
     //绑定提交按钮事件
     var that = this;
-    $("#" + that.options.submitBtnId + "").bind("click", function() {
-      //表单验证
-      if (!that.checkForm()) {
-        return false;
-      } else {
-        that.submit(that);
-      }
-    });
+    if ($.trim(that.options.submitBtnId) != "") {
+      $("#" + that.options.submitBtnId + "").bind("click", function() {
+        //表单验证
+        if (!that.checkForm()) {
+          return false;
+        } else {
+          that.submit(that);
+        }
+      });
+    }
   }
 
   //提交数据
-  QxunForm.prototype.initValidate = function() {
+  QxunForm.prototype.submit = function() {
     var that=this;
     $.ajax({
       url: that.options.submitUrl,
@@ -217,7 +218,7 @@
   QxunForm.prototype.autoFillForm = function(data) {
     var that = this;
     var key, value, tagName, type, arr;
-    for (x in data) {
+    for (var x in data) {
       key = x;
       value = data[x];
       $(that.element).find("[name='" + key + "'],[name='" + key + "[]']").each(function() {
@@ -252,7 +253,7 @@
   QxunForm.prototype.autoFillDetails = function(data) {
     var that = this;
     var key, value, type;
-    for (x in data) {
+    for (var x in data) {
       key = x;
       value = data[x];
       $("p[name='" + key + "']").each(function() {
@@ -279,7 +280,7 @@
 
   function Plugin(option) {
     return this.each(function() {
-      new QxunForm($(this), options);
+      new QxunForm($(this), option);
     })
   }
 

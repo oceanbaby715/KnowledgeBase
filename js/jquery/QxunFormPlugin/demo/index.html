@@ -5,7 +5,7 @@
 	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="../bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
 	<script src="../dist/qxun.custom.validation.js"></script>
-	<script src="../dist/jquery.qxun.form.js"></script>
+	<!-- <script src="../dist/jquery.qxun.form.js"></script> -->
 	<script src="../dist/test.js"></script>
 	<style type="text/css">
 			label.error{
@@ -74,7 +74,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="" id="form2" class="form-horizontal">
+				<form action="" id="form3" class="form-horizontal">
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="">姓名</label>
 						<div class="col-sm-10">
@@ -106,7 +106,7 @@
 	</div>
 	<script type="text/javascript">
 			$(function(){
-				$("#form1").QxunForm({
+				$("#form1").qxunForm({
 					submitUrl: "xxx.xx",//提交地址
 			        submitBtnId: "mobileSubmitBtn",//提交的按钮Id
 			        //jquery validate的验证规则
@@ -124,7 +124,7 @@
 			        	$("#postData").html(JSON.stringify(data))
 			        }
 				});
-				$("#form2").QxunForm({
+				$("#form2").qxunForm({
 					submitUrl: "xxx.xx",//提交地址
 			        submitBtnId: "mobileSubmitBtn2",//提交的按钮Id
 			        //jquery validate的验证规则
@@ -146,13 +146,14 @@
 			    	primaryKeyId:"11",
 			    	isDetails:false
 				});
-				$("#form3").QxunForm({
+				$("#form3").qxunForm({
+					submitBtnId: "",
+					getFormDataUrl:"data.json",//获取数据的url
+			    	primaryKeyId:"11",
+			    	isDetails:true,
 			        extendFill:function(data){
 			        	$("#postData3").html(JSON.stringify(data))
-			        },//自定义填充表单
-			        getFormDataUrl:"data.json",//获取数据的url
-			    	primaryKeyId:"11",
-			    	isDetails:true
+			        }//自定义填充表单
 				});
 			})
 		</script>
