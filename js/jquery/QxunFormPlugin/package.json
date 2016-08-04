@@ -1,0 +1,15 @@
+{
+  "name": "jquery.qxun.form",
+  "version": "1.0.0",
+  "description": "qxun form plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "oceanbaby715",
+  "license": "MIT",
+  "devDependencies": {
+  	"grunt": "",
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}

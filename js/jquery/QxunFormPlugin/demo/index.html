@@ -1,0 +1,160 @@
+<html>
+<head>
+	<title>表单演示</title>
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="../dist/qxun.custom.validation.js"></script>
+	<script src="../dist/jquery.qxun.form.js"></script>
+	<script src="../dist/test.js"></script>
+	<style type="text/css">
+			label.error{
+				color: red
+			}
+		</style>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>表单-添加</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" id="form1">
+					<div class="form-group">
+						<label for="">姓名</label>
+						<input type="text" class="form-control" name="userName"></div>
+					<div class="form-group">
+						<label for="">年龄</label>
+						<input type="number" class="form-control" name="userAge"></div>
+					<div class="form-group">
+						<label for="">性别</label>
+						<input type="text" class="form-control" name="userSex"></div>
+					<div class="form-group">
+						<a href="javascript:void(0)" class="btn btn-primary btn-block" id="mobileSubmitBtn">提交</a>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">提交到后台的数据</div>
+					<div class="panel-body" id="postData"></div>
+				</div>
+			</div>
+		</div>
+		<div class="page-header">
+			<h1>表单-编辑</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" id="form2">
+					<div class="form-group">
+						<label for="">姓名</label>
+						<input type="text" class="form-control" name="userName"></div>
+					<div class="form-group">
+						<label for="">年龄</label>
+						<input type="number" class="form-control" name="userAge"></div>
+					<div class="form-group">
+						<label for="">性别</label>
+						<input type="text" class="form-control" name="userSex"></div>
+					<div class="form-group">
+						<a href="javascript:void(0)" class="btn btn-primary btn-block" id="mobileSubmitBtn2">提交</a>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">从后台获取的数据</div>
+					<div class="panel-body" id="postData2"></div>
+				</div>
+			</div>
+		</div>
+		<div class="page-header">
+			<h1>表单-详情（只读）</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" id="form2" class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">姓名</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="userName"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">年龄</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="userAge"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">性别</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="userSex"></p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">从后台获取的数据</div>
+					<div class="panel-body" id="postData3"></div>
+				</div>
+			</div>
+		</div>
+		<br><br><br><br><br>
+	</div>
+	<script type="text/javascript">
+			$(function(){
+				$("#form1").QxunForm({
+					submitUrl: "xxx.xx",//提交地址
+			        submitBtnId: "mobileSubmitBtn",//提交的按钮Id
+			        //jquery validate的验证规则
+			        validate: {
+			            rules: {
+			            	userName:{
+			            		required:true
+			            	}
+			            },//规则
+			            messages: {}//信息
+			        },
+			        successRetrunUrl:"",
+			        extendValidate: null,//额外自定义验证
+			        extendSerialize: function(data){
+			        	$("#postData").html(JSON.stringify(data))
+			        }
+				});
+				$("#form2").QxunForm({
+					submitUrl: "xxx.xx",//提交地址
+			        submitBtnId: "mobileSubmitBtn2",//提交的按钮Id
+			        //jquery validate的验证规则
+			        validate: {
+			            rules: {
+			            	userName:{
+			            		required:true
+			            	}
+			            },//规则
+			            messages: {}//信息
+			        },
+			        successRetrunUrl:"",
+			        extendValidate: null,//额外自定义验证
+			        extendFill:function(data){
+			        	$("#postData2").html(JSON.stringify(data))
+			        },//自定义填充表单
+			        afterSuccess:null,//提交成功后自定义操作
+			        getFormDataUrl:"data.json",//获取数据的url
+			    	primaryKeyId:"11",
+			    	isDetails:false
+				});
+				$("#form3").QxunForm({
+			        extendFill:function(data){
+			        	$("#postData3").html(JSON.stringify(data))
+			        },//自定义填充表单
+			        getFormDataUrl:"data.json",//获取数据的url
+			    	primaryKeyId:"11",
+			    	isDetails:true
+				});
+			})
+		</script>
+</body>
+</html>
