@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>表单演示</title>
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="../dist/qxun.custom.validation.js"></script>
+	<script src="../dist/jquery.qxun.form.js"></script>
+	<style type="text/css">
+		label.error{
+			color: red
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>表单-详情（只读）</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="" id="form1" class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">姓名</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="userName"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">密码</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="password"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">年龄</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="userAge"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">邮箱</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="email"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">主页</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="homePage"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">生日</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="brithday"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">语言</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="language"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">爱好</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="hobby"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="">性别</label>
+						<div class="col-sm-10">
+							<p class="form-control-static" name="userSex"></p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">从后台获取的数据</div>
+					<div class="panel-body" id="postData3" style="word-break: break-all;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+			$(function(){
+				$("#form1").qxunForm({
+					getFormDataUrl:"data.json?rnd=1",//获取数据的url
+			    	primaryKeyId:"11",
+			    	isDetails:true,
+			        extendFill:function(data){
+			        	$("#postData3").html(JSON.stringify(data))
+			        }//自定义填充表单
+				});
+			})
+		</script>
+</body>
+</html>

@@ -1,8 +1,14 @@
 {
 	"ErrorMsg": null,
 	"ExtInfo": {
-		"userName": "oceanbaby715",
+		"userName": "刘海洋",
+		"password": "Qwerty123",
 		"userAge": "25",
+		"email": "liuhaiyang715@163.com",
+		"homePage": "http://www.intolearn.com",
+		"brithday": "2016-07-12",
+		"language": "中文",
+		"hobby": "足球,篮球,跑步,游泳",
 		"userSex": "男"
 	},
 	"IsSuccess": true,

@@ -16,7 +16,7 @@
 <body>
 <div class="container">
 	<div class="page-header">
-		<h1>表单-添加</h1>
+		<h1>表单-编辑</h1>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
@@ -118,10 +118,12 @@
 			        },
 			        successRetrunUrl:"XXXX.XXX",
 			        extendValidate: null,//额外自定义验证
-			        extendSerialize: function(data){
+			        extendFill: function(data){
 			        	$("#postData").html(JSON.stringify(data));
 			        	return data;
-			        }
+			        },
+			        getFormDataUrl:"data.json?rnd=1",//获取数据的url
+			    	primaryKeyId:"11",
 				});
 			})
 		</script>
