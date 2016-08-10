@@ -1,8 +1,8 @@
 # QxunFormPlugin
 jquery 表单插件
 ## 示例（demo）
-表单添加：[表单添加](http://oceanbaby715.github.io/KnowledgeBase/js/jquery/QxunFormPlugin/demo/index.html)
-表单修改[表单修改](http://oceanbaby715.github.io/KnowledgeBase/js/jquery/QxunFormPlugin/demo/edit.html)
+表单添加：[表单添加](http://oceanbaby715.github.io/KnowledgeBase/js/jquery/QxunFormPlugin/demo/index.html)<br>
+表单修改：[表单修改](http://oceanbaby715.github.io/KnowledgeBase/js/jquery/QxunFormPlugin/demo/edit.html)<br>
 详情：[详情](http://oceanbaby715.github.io/KnowledgeBase/js/jquery/QxunFormPlugin/demo/detail.html)
 ## 依赖 (dependence)
 jQuery 1.7以上版本和jquery-validation 插件
@@ -30,22 +30,9 @@ jQuery 1.7以上版本和jquery-validation 插件
                     language:{required:true},
                     hobby:{required:true},
                     userSex:{required:true}
-                },
-                errorPlacement:function(error,element){
-                    var type=element.attr("type");
-                    if (type=="radio" || type=="checkbox") {
-                        error.appendTo(element.parent().parent().parent());
-                    }else{
-                        error.appendTo(element.parent());
-                    }
                 }
             },
-            successRetrunUrl:"XXXX.XXX",
-            extendValidate: null,//额外自定义验证
-            extendSerialize: function(data){
-                $("#postData").html(JSON.stringify(data));
-                return data;
-            }
+            afterSuccessUrl:"XXXX.XXX"
         });
     })
 
@@ -54,17 +41,36 @@ jQuery 1.7以上版本和jquery-validation 插件
 |    参数          |     说明       |   类型   |   默认值   | 可填值 |
 |------------------|----------------|----------|------------|--------|
 | submitUrl        | 表单提交的地址 | string   |     空     |        |
-| submitBtnId      | 提交的按钮ID   | string   | mobileSubmitBtn ||
-| validate         | 验证条件       | object   |空| |
-| successRetrunUrl | 提交成功后跳转的url | string   | 空| |
-| extendValidate   | 提交前额外的验证条件| function|null| |
-| extendSerialize  | 提交前额外的数据组装| function   |    null |        |
-| extendFill       | 编辑\详情时自定义的数据填充| function   | null |   |
-| afterSuccess     | 提交成功后自定义操作| function   | null     |        |
-| getFormDataUrl   | 获取数据的url       | string   | 空     |        |
-| primaryKeyId     | 主键Id       | string   | 空     |        |
-| isDetails        | 是否是详情页 | bool   | false     |  |
+| submitBtnId      | 提交的按钮ID   | string   | formSubmitBtn |     |
+| validate         | 验证条件       | object   |   null   |          |
+| clearForm | 提交成功后是否clearForm | bool   | true   |            |
+| resetForm   | 提交成功后是否resetForm| bool  |true    |            |
+| extendBeforeSubmit  | 提交之前的额外处理| object   |`extendBeforeSubmit:{validate:null,//验证serialize:null//重组数据}`|     |
+| extendAfterSubmit |提交之后的额外处理| object   | `extendAfterSubmit:{success:null,//成功error:null//失败}` |   |
+| afterSuccessUrl     | 提交成功后跳转的地址| string   | 空     |    |
+| getDataUrl   |编辑或者详情获取数据的url| string   | 空     |        |
+| isDetails     |是否是详情页面| bool   | false     |        |
+| extendFill        | 额外的填充 | function   | null     |  |
 
+## 实用方法
+### formSerialize
+将表单序列化成查询串。这个方法将返回一个形如： name1=value1&name2=value2的字符串。
+`var queryString = $('#form1').formSerialize(); `
+### fieldSerialize
+将表单里的元素序列化成字符串。当你只需要将表单的部分元素序列化时可以用到这个方法。 这个方法将返回一个形如： name1=value1&name2=value2的字符串。
+`var queryString = $('#form1 :password').fieldSerialize();`
+### fieldValue
+取出所有匹配要求的域的值，以数组形式返回,如果没有符合条件的域，这个数组将会是个空数组，否则它将会包含至少一个值
+`var value = $('#form1 :password').fieldValue(); alert('The password is: ' + value[0]);`
+### resetForm
+把表单重置成最初的状态
+`$('#form1').resetForm()`
+### clearForm
+清空表单所有元素的值
+`$('#form1').clearForm()`
+### clearFields
+清空某个表单域的值。这个可以用在只需要清空表单里部分元素的值的情况
+`$('#form1 :password').clearFields()`
 ## 自定义验证（custom.validation）
 需要引入
 

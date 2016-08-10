@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>表单演示</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="../dist/bootstrap.min.css">
 	<script src="../dist/jquery.min.js"></script>
 	<script src="../dist/jquery.validate.min.js"></script>
@@ -23,7 +24,7 @@
 			<form action="" id="form1">
 				<div class="form-group">
 					<label for="">姓名</label>
-					<input type="text" class="form-control" name="userName">
+					<input type="text" class="form-control" name="userName" value="11">
 				</div>
 				<div class="form-group">
 					<label for="">密码</label>
@@ -77,13 +78,17 @@
 					</p>
 				</div>
 				<div class="form-group">
+					<label for="">简介</label>
+					<textarea name="desciption" cols="30" rows="5" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
 					<a href="javascript:void(0)" class="btn btn-primary btn-block" id="mobileSubmitBtn">提交</a>
 				</div>
 			</form>
 		</div>
 		<div class="col-md-6">
 			<div class="panel panel-default">
-				<div class="panel-heading">提交到后台的数据</div>
+				<div class="panel-heading">从后台获取的数据</div>
 				<div class="panel-body" id="postData" style="word-break: break-all;"></div>
 			</div>
 		</div>
@@ -116,14 +121,48 @@
 			            	}
 			            }
 			        },
-			        successRetrunUrl:"XXXX.XXX",
-			        extendValidate: null,//额外自定义验证
+			        //提交之前的操作
+			        extendBeforeSubmit:{
+			        	//额外验证
+			        	validate:function(){
+			        		// if (1!=2) {
+			        		// 	//写你的错误处理代码
+			        		// 	alert("自定义验证没能通过，不能提交！");
+			        		// 	return false;
+			        		// }else{
+			        		// 	return true;
+			        		// }
+			        		return true;
+			        	},
+		        		//重组数据
+      					serialize:function(data){
+      						$("#postData").html(JSON.stringify(data));
+      						return data;
+      					}
+			        },
+			        //提交之后的操作
+			        extendAfterSubmit:{
+			        	//成功操作
+			        	success:function(data){
+			        		console.log(JSON.stringify(data))
+			        	},
+			        	//失败操作
+			        	error:function(jqXHR, textStatus, errorMsg){
+			        		console.log(jqXHR);
+			        		console.log("textStatus:"+textStatus);
+			        		console.log("errorMsg:"+errorMsg);
+			        	}
+			        },
+			        //成功后跳转的url
+			        afterSuccessUrl:"XXXX.XXX",
+			        //获取数据的url
+			        getDataUrl:"data.json?rnd=2",
+			        //额外填充数据处理
 			        extendFill: function(data){
 			        	$("#postData").html(JSON.stringify(data));
 			        	return data;
 			        },
-			        getFormDataUrl:"data.json?rnd=1",//获取数据的url
-			    	primaryKeyId:"11",
+
 				});
 			})
 		</script>

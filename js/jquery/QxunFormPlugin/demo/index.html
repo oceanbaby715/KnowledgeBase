@@ -1,11 +1,12 @@
 <html>
 <head>
 	<title>表单演示</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="../dist/bootstrap.min.css">
 	<script src="../dist/jquery.min.js"></script>
 	<script src="../dist/jquery.validate.min.js"></script>
 	<script src="../dist/qxun.custom.validation.js"></script>
-	<script src="../dist/jquery.qxun.form.js"></script>
+	<script src="../dist/jquery.qxun.form.min.js"></script>
 	<style type="text/css">
 		label.error{
 			color: red;
@@ -77,6 +78,10 @@
 					</p>
 				</div>
 				<div class="form-group">
+					<label for="">简介</label>
+					<textarea name="desciption" cols="30" rows="5" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
 					<a href="javascript:void(0)" class="btn btn-primary btn-block" id="mobileSubmitBtn">提交</a>
 				</div>
 			</form>
@@ -116,12 +121,39 @@
 			            	}
 			            }
 			        },
-			        successRetrunUrl:"XXXX.XXX",
-			        extendValidate: null,//额外自定义验证
-			        extendSerialize: function(data){
-			        	$("#postData").html(JSON.stringify(data));
-			        	return data;
-			        }
+			        //提交之前的操作
+			        extendBeforeSubmit:{
+			        	//额外验证
+			        	// validate:function(){
+			        	// 	// if (1!=2) {
+			        	// 	// 	//写你的错误处理代码
+			        	// 	// 	alert("自定义验证没能通过，不能提交！");
+			        	// 	// 	return false;
+			        	// 	// }else{
+			        	// 	// 	return true;
+			        	// 	// }
+			        	// 	return true;
+			        	// },
+		        		//重组数据
+      					serialize:function(data){
+      						$("#postData").html(JSON.stringify(data));
+      						return data;
+      					}
+			        },
+			        //提交之后的操作
+			        // extendAfterSubmit:{
+			        // 	//成功操作
+			        // 	success:function(data){
+			        // 		console.log(JSON.stringify(data))
+			        // 	},
+			        // 	//失败操作
+			        // 	error:function(jqXHR, textStatus, errorMsg){
+			        // 		console.log(jqXHR);
+			        // 		console.log("textStatus:"+textStatus);
+			        // 		console.log("errorMsg:"+errorMsg);
+			        // 	}
+			        // },
+			        afterSuccessUrl:"XXXX.XXX"
 				});
 			})
 		</script>
