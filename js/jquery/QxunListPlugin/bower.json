@@ -1,0 +1,21 @@
+{
+  "name": "jquery.qxun.form",
+  "description": "qxun form plugin",
+  "main": "index.js",
+  "authors": [
+    "oceanbaby715"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/oceanbaby715/KnowledgeBase",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery-validation": "jquery-validate#^1.15.1"
+  }
+}
