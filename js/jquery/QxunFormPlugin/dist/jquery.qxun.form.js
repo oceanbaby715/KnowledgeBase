@@ -65,6 +65,7 @@
           return false;
         } else {
           that.submit();
+          $("#"+that.options.submitBtnId).attr("disabled","true");
         }
       });
     }
@@ -86,6 +87,9 @@
       },
       error: function(jqXHR, textStatus, errorMsg) {
         that.extendAfterSubmit.error(that,jqXHR, textStatus, errorMsg);
+      },
+      complete:function(){
+        $("#"+that.options.submitBtnId).removeAttr("disabled");
       }
     });
   }
@@ -293,17 +297,6 @@
       this.options.extendFill(data);
     }
   }
-
-  //重置表单
-  QxunForm.prototype.resetForm = function() {
-    this.element[0].reset();
-  }
-
-  //清空表单
-  QxunForm.prototype.clearForm=function(){
-
-  }
-
 
 
 
